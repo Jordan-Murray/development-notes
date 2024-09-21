@@ -26,7 +26,15 @@
   });
     ```
   - ContinueWith executes when the Task completes, regardless of whether the task was successful, failed, or canceled.
+  - We can specifcy TaskContinuationOptions on a continuation to specify to only run when the completed task was **OnFaulted**,**OnCanceled** or **RantoCompletion**.
+  - This allows us to configure specific scenarios to happen depending on the outcome of the originating task!
+  - **Before await async this was a very common approach!**
 
+- **Task Cancellation**
+  - CancellationTokenSource is coupled to a cancellationToken and is used indicate to a task that its cancelled or within a async operation to see if a cancellation has been requested.
+  - Add param to operation of CancellationToken.
+  - Calling Cancel will not automatically terminmate the async operation!
+  - Handling cancellation requests can be done by checking `cancellationToken.IsCancellationRequested`.
 
 ### Best Practices
 
