@@ -1,36 +1,37 @@
-**Day 1 - 20/09/2024** 
+## **Day 1 - 20/09/2024**
 
-https://app.pluralsight.com/ilx/video-courses/5ea19dbe-1a34-4df1-8320-5c3198bcabdf
+### **Course/Resource**  
+[Asynchronous Programming in .NET](https://app.pluralsight.com/ilx/video-courses/5ea19dbe-1a34-4df1-8320-5c3198bcabdf)
 
-# Basic
+### **Key Concepts**
+- Asynchronous programming allows offloading work to different threads to enable parallel execution.
+- The `await` keyword introduces a continuation, allowing the operation to return to the original context (thread).
+- `Async` methods are suited for I/O-bound operations (disk, memory, web, database), while **parallel programming** is better for CPU-bound tasks.
 
-Asynchrony means we can offload the operation to a different thread. Allowing the work to occur in parallel.
-The await keyword introduces a continuation, allowing you to get back to the original context (thread).
-A continuation is introduced on every await. 
+### **Detailed Notes**
+- **Asynchronous Programming Basics**:
+  - The `await` keyword creates a continuation that resumes on the original thread.
+  - `.Result` and `.Wait()` should be avoided in asynchronous operations as they block the calling thread and could lead to deadlocks. After the `await`, using `.Result` is safe because the task has completed.
+  
+- **I/O vs. CPU-bound operations**:
+  - I/O-bound tasks should use asynchronous programming (`async/await`), while CPU-bound tasks should use parallel programming.
 
-# More
+- **Best Practices**:
+  - Avoid **`async void`** except in event handlers. Use **`async Task`** to ensure proper exception handling.
+  - Suffixing methods with `Async` is no longer necessary as modern IDEs indicate asynchronous operations.
 
-- Threading (Low Level)
-- Background Worker (Event-based async pattern)
-- TPL - Async and Await (more modern)
+### **Code Examples**
+```csharp
+public async Task FetchDataAsync()
+{
+    // Offload I/O-bound work (e.g., fetching from a web API)
+    await GetWebDataAsync();
+    // Continue after the async operation is complete
+}
+```
 
-Aynsc suited for I/O Operations
+### Best Practices
 
-- Disk
-- Memory
-- Web/ API
-- Database
-
-Where as CPU bound operations youd use Parallel Programming.
-
-.Result and .Wait will block your thread and perform the operatoin synchronously. May cause a deadlock
-However in the continuation (after the await keyword) using the Result property is fine.
-
-Async in .NET Apis allows the server to continue serving requests while the other thread deals with the async process.
-
-**Suffixing asynchronous methods with "Async" is no longer a design guideline. GetStockPricesAsync() should be named GetStockpPrices()**
-This is because modern code editors will tell you its async and needs to be awaited anyway!
-
-**Avoid "async void" at all costs** - apart from event handlers!
-Should be async Task
-This is because it won't validate the success of the operation and you lose all exception handling.
+- Avoid .Result and .Wait() to prevent blocking the thread and causing deadlocks.
+- Use async Task instead of async void for exception handling.
+- Async methods should not require the Async suffix in method names as IDEs show the asynchronous nature.
