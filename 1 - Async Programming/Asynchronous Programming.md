@@ -10,9 +10,6 @@ A continuation is introduced on every await.
 
 # More
 
-**TPL** - Task Parallel Library
-Allows for both asyncronous and parallel programming. Async requires you subscribe to that operation finishing
-
 - Threading (Low Level)
 - Background Worker (Event-based async pattern)
 - TPL - Async and Await (more modern)
