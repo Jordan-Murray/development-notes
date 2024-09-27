@@ -42,7 +42,17 @@
   - Interlocked uses less instructions and is faster than a lock.
 
 - **Deadlocks with Nested Locks**
-  - 
+  - Deadlock - Multiple threads fighting over the same resource
+  - Avoiding a Deadlock
+    - Don't share lock objects for multiple shared resources
+    - Use one lock object for each shared resources
+    - Give your lock object a meaningful name
+    - Avoid using `string`, `typeof()`,`this` as a lock!
+
+- **Cancel Parallel Operations**
+  -  
 
 ### Best Practices
-- TPL 
+- Do as little work as possible within a lock!
+- Use one lock object for each shared resources.
+- Avoid nested locks and shared locks!
