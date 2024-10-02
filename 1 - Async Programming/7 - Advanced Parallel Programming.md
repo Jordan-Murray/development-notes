@@ -4,7 +4,9 @@
 [Asynchronous Programming in .NET](https://app.pluralsight.com/ilx/video-courses/5ea19dbe-1a34-4df1-8320-5c3198bcabdf)
 
 ### **Key Concepts**
-- Break 
+- Use atomic operations (Interlocked) instead of locks for better performance in shared resources.
+- Avoid nested locks and shared lock objects to prevent deadlocks.
+- Use `CancellationTokenSource` to cancel parallel tasks, and `AsyncLocal<T>` for task-specific data isolation.
 
 ### **Detailed Notes**
 - **Working with Shared Variables**:
