@@ -19,7 +19,8 @@
   ![alt text](image-1.png)
   - Doing it this way promotes **separtion of concerns**
   - Improves security and scalability.
-  - An example folder structure may look something like this:
+- **Structure**
+- An example folder structure may look something like this:
   ```
       Core
       └── Application
@@ -29,25 +30,10 @@
                   │   ├── Commands
                   │   └── Queries
                   └── Requests
+                      ├── Commands
+                      └── Queries
   ```
-  - Naming conventions should imply what the request is for. (i.e GetOrderSummaryRequest.cs)
-  - Requests
-    ```
-    public class GetOrderSummaryRequest : IRequest<List<OrderSummaryDTO>>{
 
-    }
-    ```
-  - Handler (For the above would be a Query because it GETs data)
-    ```
-    public class GetOrderSummaryRequestHandler : IRequestHandler<GetOrderSummaryRequest, List<OrderSummaryDTO>>
-    {
-      //Inject IRepository references to be able to communicate with the database WITHOUT directly communicating to the Domain layer
-      public Task<List<OrderSummaryDTO>> Handle(GetOrderSummaryRequest request, CancellationToken cancellationToken)
-      {
-        //Implementation
-      }
-    }
-    ``` 
   
 ### Best Practices
 - 
