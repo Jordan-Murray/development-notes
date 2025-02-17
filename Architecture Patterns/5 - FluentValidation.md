@@ -17,12 +17,23 @@
 
   public class CreateOrderDTOValidator : AbstractValidator<CreateOrderDTO>
   {
-    public CreateOrderDTOValidator()
+    private readonly IOrderRepository _orderRepository;
+    public CreateOrderDTOValidator(IOrderRepository orderRepository)
     {
         RuleFor(p => p.Basket)
             .NotEmpty()
             .WithMessage("{PropertyName} is required")
             .NotNull();
+        
+        RuleFor(p => p.StartDate)
+            .LessThan(p => p.EndDate).WithMessage("{PropertyName} must be before {ComparisonValue}"); //This doesn't make sense for our use case but here just to illustrate
+        
+        RuleFor(p => p.Basket.ItemId)
+            .MustAsync(async (id,token) =>
+            {
+                var itemExists = await _orderRepository.Exists(id);
+                return itemExists;
+            }).WithMessage("{PropertyName} does not exist")
     }
   }
   ```
@@ -36,3 +47,17 @@
         throw new Exception()
     }
     ```
+
+- If we have the same rules repeated across multiple DTOs we can create an InterfaceDTO and then create an IDTOValidator : AbstractValidator<IDTO>
+- If we want a class to apply all validation rules from another validator AND some more we can do the following:
+```
+
+public class OrderDTOValidator : AbstractValidator<OrderDTO>
+{
+    public OrderDTOValidator()
+    {
+        Include(new CreateOrderDtoValidator());
+    }
+} 
+
+```
