@@ -7,7 +7,9 @@
   - Func is a delegate type.
   - The last parameter of the Func is always the output type
   - Func is a method that has a return value other than void.
-  - Difference between the implementation of the Delegate and Func is that we had to declare the Delegate in the class, whereas the Func signiture is defined in the target method.
+  - Difference between the implementation of the Delegate and Func is that we had to declare the Delegate in the class, whereas the Func signature is defined in the target method.
+  - Can only support 15/16 input variables.
+  - Cannot support OUT params/ variables
     ```
         //Class Library Project
         public class ShoppingBasketModel{
@@ -18,14 +20,14 @@
 
             // This method should probably do more
             // Check if item is stock etc 
-            public deciaml GenerateTotal(MentionDiscount mentionDiscount, 
-                Func<List<ProductModel>, decimal, decimal> caclulateDiscountedTotal) //T1 input, T2 input, T3 output
+            public decimal GenerateTotal(MentionDiscount mentionDiscount, 
+                Func<List<ProductModel>, decimal, decimal> calculateDiscountedTotal) //T1 input, T2 input, T3 output
             {
                 decimal subTotal - Items.Sum(x => x.Price);
 
                 mentionDiscount(subTotal);
 
-                return caclulateDiscountedTotal(Items, subTotal);
+                return calculateDiscountedTotal(Items, subTotal);
             }
         }
 
@@ -45,11 +47,11 @@
                 Console.WriteLine($"Subtotal is £{subTotal}");
             }
             
-            privatye static decimal CalculateLeveledDiscount(List<ProductModel> items, deciaml subTotal) // Matches our func param signiture
+            private static decimal CalculateLeveledDiscount(List<ProductModel> items, decimal subTotal) // Matches our func param signature
             {
                 if(subTotal > 100)
                 {
-                    returen subTotal * 0.80M;
+                    return subTotal * 0.80M;
                 }
                 else if ...
                 else{

@@ -5,6 +5,7 @@
   - Action returns a void
   - Wrapped deligate
   - Func returns a value, Action returns void.
+  - Cannot support OUT params/ variables
   ```
 
     public class ShoppingBasketModel{
@@ -13,8 +14,8 @@
 
         public List<Product> Items{get;set;} = new List<Product>();
 
-        public deciaml GenerateTotal(MentionDiscount mentionDiscount, 
-            Func<List<ProductModel>, decimal, decimal> caclulateDiscountedTotal,
+        public decimal GenerateTotal(MentionDiscount mentionDiscount, 
+            Func<List<ProductModel>, decimal, decimal> calculateDiscountedTotal,
             Action<string> tellUserDiscounting)
         {
             decimal subTotal - Items.Sum(x => x.Price);
@@ -23,7 +24,7 @@
 
             tellUserDiscounting("We are applying your discount.");
 
-            return caclulateDiscountedTotal(Items, subTotal);
+            return calculateDiscountedTotal(Items, subTotal);
         }
     }
 
@@ -42,11 +43,11 @@
                 Console.WriteLine($"Subtotal is £{subTotal}");
             }
             
-            privatye static decimal CalculateLeveledDiscount(List<ProductModel> items, deciaml subTotal) 
+            private static decimal CalculateLeveledDiscount(List<ProductModel> items, decimal subTotal) 
             {
                 if(subTotal > 100)
                 {
-                    returen subTotal * 0.80M;
+                    return subTotal * 0.80M;
                 }
                 else if ...
                 else{

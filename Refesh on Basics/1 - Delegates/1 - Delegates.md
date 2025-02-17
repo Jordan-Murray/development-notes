@@ -10,12 +10,12 @@
 
             public delegate void MentionDiscount(decimal subTotal); 
             // Think of this as an interface as a frame of reference.
-            // A contract to say whenevr you use this, its going to returen void and its going to take in a decimal. 
+            // A contract to say whenever you use this, its going to return void and its going to take in a decimal. 
             // Class library doesn't care about the implementation of the UI library, it just knows that it can accept a delegate method
 
             public List<Product> Items{get;set;} = new List<Product>();
 
-            public deciaml GenerateTotal(MentionDiscount mentionDiscount)
+            public decimal GenerateTotal(MentionDiscount mentionDiscount)
             {
                 decimal subTotal - Items.Sum(x => x.Price);
 
@@ -24,7 +24,7 @@
 
                 if(subTotal > 100)
                 {
-                    returen subTotal * 0.80M;
+                    return subTotal * 0.80M;
                 }
                 else{
                     return subTotal;
